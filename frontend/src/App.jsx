@@ -34,6 +34,9 @@ const UnauthenticatedRoute = React.lazy(() =>
   import("./components/Auth/UnauthenticatedRoute")
 );
 const ViewRoomDetails = React.lazy(() => import("./pages/ViewRoomDetails"));
+const IncommingRequest = React.lazy(() =>
+  import("./pages/landownerPages/IncommingRequest")
+);
 
 const App = () => {
   return (
@@ -80,6 +83,7 @@ const App = () => {
               <Route path="/uploadrooms" element={<UploadRooms />} />
               <Route path="/landowner-rooms" element={<LandOwnerRooms />} />
               <Route path="/my-renters" element={<MyRenters />} />
+              <Route path="/incoming-request" element=<IncommingRequest /> />
             </Route>
 
             {/* Protected Routes for all users  */}

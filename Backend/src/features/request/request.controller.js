@@ -38,6 +38,21 @@ class RequestController {
       });
     }
   }
+
+  async getUsers(req, res) {
+    const roomId = req.params.id;
+    try {
+      const user = await this.requestRespoitory.getUser(roomId);
+      const extractedUser = user.map((u) => u.renterId);
+      return res.status(200).json({ success: true, users: extractedUser });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong with database",
+      });
+    }
+  }
 }
 
 export default RequestController;

@@ -4,10 +4,13 @@ import { toast } from "react-toastify";
 import NoRoomsFound from "../NoRoomsFound";
 import { API_URL } from "../../config";
 import Swal from "sweetalert2";
+import { FaBell, FaEdit, FaSave, FaTrash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const LandOwnerRooms = () => {
   const [rooms, setRooms] = useState([]);
   const [editingRoom, setEditingRoom] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -81,6 +84,10 @@ const LandOwnerRooms = () => {
         toast.info("Deletion cancelled");
       }
     });
+  };
+
+  const handleIncomingRequest = (roomId) => {
+    navigate("/incoming-request", { state: { roomId } });
   };
 
   const handleAddressChange = (e, field) => {
@@ -254,23 +261,33 @@ const LandOwnerRooms = () => {
             {editingRoom === room._id ? (
               <button
                 onClick={() => handleSaveClick(room._id)}
-                className="bg-green-500 text-white py-2 px-4 mr-4 rounded hover:bg-green-600"
+                className="bg-green-500 text-white py-2 px-4 mr-4 rounded hover:bg-green-600 flex items-center"
               >
-                Save Room
+                <FaSave className="mr-2" />
+                <span className="hidden sm:inline">Save Room</span>
               </button>
             ) : (
               <button
                 onClick={() => handleEditClick(room._id)}
-                className="bg-blue-500 text-white py-2 px-4 mr-4 rounded hover:bg-blue-600"
+                className="bg-gray-800 text-white py-2 px-4 mr-4 rounded hover:bg-blue-600 flex items-center"
               >
-                Edit Room
+                <FaEdit className="mr-2" />
+                <span className="hidden sm:inline">Edit Room</span>
               </button>
             )}
             <button
               onClick={() => handleDeleteClick(room._id)}
-              className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+              className="bg-red-500 text-white py-2 px-4 mr-4 rounded hover:bg-red-600 flex items-center"
             >
-              Delete Room
+              <FaTrash className="mr-2" />
+              <span className="hidden sm:inline">Delete Room</span>
+            </button>
+            <button
+              onClick={() => handleIncomingRequest(room._id)}
+              className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 flex items-center"
+            >
+              <FaBell className="mr-2" />
+              <span className="hidden sm:inline">Incoming Request</span>
             </button>
           </div>
         </div>

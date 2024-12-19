@@ -31,5 +31,10 @@ class RequestRepository {
       console.log(err);
     }
   }
+
+  async getUser(roomId) {
+    const user = await requestModel.find({ roomId }).populate("renterId");
+    return user;
+  }
 }
 export default RequestRepository;

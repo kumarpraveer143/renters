@@ -180,25 +180,6 @@ const Navbar = () => {
             <></>
           )}
 
-          {JSON.parse(user)?.userType === "landowner" ? (
-            <>
-              <Link
-                onClick={() => handleNavigation("/uploadrooms")}
-                className="block px-4 py-2 hover:bg-gray-600 text-center"
-              >
-                Upload Rooms
-              </Link>
-              <Link
-                onClick={() => handleNavigation("/myrooms")}
-                className="block px-4 py-2 hover:bg-gray-600 text-center"
-              >
-                My Rooms
-              </Link>
-            </>
-          ) : (
-            <></>
-          )}
-
           {user ? (
             <>
               <div className="block px-4 py-2 hover:bg-gray-600 text-center">
