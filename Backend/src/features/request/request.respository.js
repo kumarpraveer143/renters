@@ -6,17 +6,29 @@ const requestModel = mongoose.model("Request", requestSchema);
 class RequestRepository {
   async toggleRequest(renterId, roomId) {
     const existingRequest = await requestModel.findOne({ renterId, roomId });
+    try {
+      if (!existingRequest) {
+        const newRequest = new requestModel({ renterId, roomId });
+        await newRequest.save();
+        return newRequest;
+      } else {
+        const deletedRequest = await requestModel.findOneAndDelete({
+          renterId,
+          roomId,
+        });
+        return deletedRequest;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-    if (!existingRequest) {
-      const newRequest = new requestModel(renterId, roomId);
-      await newRequest.save();
-      return newRequest;
-    } else {
-      const deletedRequest = await requestModel.findOneAndDelete({
-        renterId,
-        roomId,
-      });
-      return deletedRequest;
+  async getRequest(renterId, roomId) {
+    try {
+      const request = await requestModel.findOne({ renterId, roomId });
+      return request ? true : false;
+    } catch (err) {
+      console.log(err);
     }
   }
 }

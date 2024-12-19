@@ -29,7 +29,6 @@ export default class UserController {
     try {
       const user = req.body;
       const { email } = req.body;
-
       // Check if email already exists in the database
       const findUserByEmail = await this.userRepository.findUserByEmail({
         email,

@@ -10,4 +10,8 @@ requestRouter.post("/:id", jwtAuth, (req, res) => {
   requestController.toggleRequest(req, res);
 });
 
+requestRouter.get("/:id", jwtAuth, (req, res) => {
+  requestController.getRequest(req, res);
+});
+
 export default requestRouter;
