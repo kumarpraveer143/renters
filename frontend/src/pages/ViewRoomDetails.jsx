@@ -15,6 +15,20 @@ const ViewRoomDetails = () => {
   const [hasRequested, setHasRequested] = useState(false);
 
   useEffect(() => {
+    const isRequest = async () => {
+      try {
+        const req = await axios.get(`${API_URL}/request/${roomId}`, {
+          withCredentials: true,
+        });
+        setHasRequested(req.data.message);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    isRequest();
+  }, []);
+
+  useEffect(() => {
     const isFabRoom = async () => {
       try {
         const response = await axios(
@@ -76,14 +90,16 @@ const ViewRoomDetails = () => {
       });
 
       if (result.isConfirmed) {
-        // Simulating an API call here, this should be the actual API call for requesting/withdrawing
-        // const endpoint = hasRequested
-        //   ? `${API_URL}/request/withdraw/${roomId}`
-        //   : `${API_URL}/request/make/${roomId}`;
-        // const response = await axios.get(endpoint, { withCredentials: true });
-
-
-        
+        try {
+          const response = await axios.post(
+            `${API_URL}/request/${roomId}`,
+            {},
+            { withCredentials: true }
+          );
+          console.log(response.data);
+        } catch (err) {
+          console.log(err);
+        }
 
         toast.success(
           hasRequested ? "Request withdrawn" : "Request sent to landowner"

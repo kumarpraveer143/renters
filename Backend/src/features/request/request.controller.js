@@ -27,13 +27,9 @@ class RequestController {
     try {
       const request = await this.requestRespoitory.getRequest(userId, roomId);
       if (request) {
-        return res
-          .status(200)
-          .json({ success: true, message: "yes request is there!" });
+        return res.status(200).json({ success: true, message: true });
       } else {
-        return res
-          .status(200)
-          .json({ success: true, message: "No request is not there!" });
+        return res.status(200).json({ success: true, message: false });
       }
     } catch (err) {
       return res.status(500).json({
