@@ -45,7 +45,7 @@ const LandOwnerRooms = () => {
         }
       );
 
-      console.log("API Response:", response.data);
+      // console.log("API Response:", response.data);
       toast.success("Room updated successfully!");
     } catch (error) {
       console.error("Error updating room:", error);
@@ -72,7 +72,7 @@ const LandOwnerRooms = () => {
             withCredentials: true,
           });
           toast.success("Room Deleted Successfully!");
-          console.log(response.data);
+          // console.log(response.data);
 
           // Update the rooms state after deletion
           setRooms(rooms.filter((room) => room._id !== roomId));
@@ -282,13 +282,19 @@ const LandOwnerRooms = () => {
               <FaTrash className="mr-2" />
               <span className="hidden sm:inline">Delete Room</span>
             </button>
-            <button
-              onClick={() => handleIncomingRequest(room._id)}
-              className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 flex items-center"
-            >
-              <FaBell className="mr-2" />
-              <span className="hidden sm:inline">Incoming Request</span>
-            </button>
+            {room.isAvailable === true ? (
+              <>
+                <button
+                  onClick={() => handleIncomingRequest(room._id)}
+                  className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 flex items-center"
+                >
+                  <FaBell className="mr-2" />
+                  <span className="hidden sm:inline">Incoming Request</span>
+                </button>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       ))}

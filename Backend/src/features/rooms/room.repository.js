@@ -9,6 +9,14 @@ class RoomRepository {
     return room;
   }
 
+  //change room status by room id
+  async changeStatus(id) {
+    const room = await RoomModel.findOne({ _id: id });
+    room.isAvailable = false;
+    await room.save();
+    return room;
+  }
+
   //get room by id
   async getRoomById(id) {
     const room = await RoomModel.findOne({ _id: id });

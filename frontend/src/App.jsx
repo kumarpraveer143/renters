@@ -8,6 +8,7 @@ import RentersAuth from "./components/Auth/RentersAuth";
 import PaymentHistory from "./pages/landownerPages/PaymentHistory";
 import MyRenters from "./pages/landownerPages/MyRenters";
 import Loading from "./components/UI/Loading";
+import AuthenticatedUser from "./components/Auth/AuthenticatedUser";
 
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const LandOwnerRooms = React.lazy(() =>
@@ -67,29 +68,31 @@ const App = () => {
               <Route path="/login" element={<Login />} />
             </Route>
 
-            {/* Routes for only Renters */}
-            <Route element={<RentersAuth />}>
-              <Route path="/findrooms" element={<FindRooms />} />
-              <Route
-                path="/viewRoomsDetails/:id"
-                element={<ViewRoomDetails />}
-              />
-              <Route path="/favouriteRooms" element={<FavouriteRoom />} />
-            </Route>
+            <Route element={<AuthenticatedUser />}>
+              {/* Routes for only Renters */}
+              <Route element={<RentersAuth />}>
+                <Route path="/findrooms" element={<FindRooms />} />
+                <Route
+                  path="/viewRoomsDetails/:id"
+                  element={<ViewRoomDetails />}
+                />
+                <Route path="/favouriteRooms" element={<FavouriteRoom />} />
+              </Route>
 
-            {/* Routes for only landowners */}
-            <Route element={<LandownerAuth />}>
-              <Route path="payment-history" element={<PaymentHistory />} />
-              <Route path="/uploadrooms" element={<UploadRooms />} />
-              <Route path="/landowner-rooms" element={<LandOwnerRooms />} />
-              <Route path="/my-renters" element={<MyRenters />} />
-              <Route path="/incoming-request" element=<IncommingRequest /> />
-            </Route>
+              {/* Routes for only landowners */}
+              <Route element={<LandownerAuth />}>
+                <Route path="payment-history" element={<PaymentHistory />} />
+                <Route path="/uploadrooms" element={<UploadRooms />} />
+                <Route path="/landowner-rooms" element={<LandOwnerRooms />} />
+                <Route path="/my-renters" element={<MyRenters />} />
+                <Route path="/incoming-request" element=<IncommingRequest /> />
+              </Route>
 
-            {/* Protected Routes for all users  */}
-            <Route element={<ProtectedRoute />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/profile" element={<Profile />} />
+              {/* Protected Routes for all users  */}
+              <Route element={<ProtectedRoute />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/profile" element={<Profile />} />
+              </Route>
             </Route>
 
             <Route path="/pagenotfound" element={<PageNotFound />} />

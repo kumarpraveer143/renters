@@ -9,6 +9,7 @@ import roomRouter from "./src/features/rooms/room.route.js";
 import historyRouter from "./src/features/history/history.route.js";
 import favouriteRouter from "./src/features/favourite/favourite.route.js";
 import requestRouter from "./src/features/request/request.router.js";
+import relationshipRouter from "./src/features/relationship/relationship.router.js";
 dotenv.config();
 
 const app = express();
@@ -32,6 +33,7 @@ app.use("/api/rooms", roomRouter);
 app.use("/api/history", historyRouter);
 app.use("/api/favourite", favouriteRouter);
 app.use("/api/request", requestRouter);
+app.use("/api/relationship", relationshipRouter);
 
 app.listen(port, "0.0.0.0", () => {
   connectToMongoose();
