@@ -202,24 +202,35 @@ const ViewRoomDetails = () => {
             )}
           </button>
 
-          <button
-            onClick={handleRequest}
-            className="flex items-center space-x-2 py-3 px-6 text-lg md:py-2 md:px-4 md:text-base rounded-md text-white font-semibold bg-gray-800 hover:bg-gray-600"
-          >
-            {hasRequested ? (
-              <>
-                <FaTimes className="text-white" /> {/* Withdraw icon */}
-                <span className="hidden sm:inline">Withdraw Request</span>{" "}
-                {/* Hide on small screens */}
-              </>
-            ) : (
-              <>
-                <FaPaperPlane className="text-white" /> {/* Paper plane icon */}
-                <span className="hidden sm:inline">Request Landowner</span>{" "}
-                {/* Hide on small screens */}
-              </>
-            )}
-          </button>
+          {roomDetails.isAvailable === true ? (
+            <>
+              <button
+                onClick={handleRequest}
+                className="flex items-center space-x-2 py-3 px-6 text-lg md:py-2 md:px-4 md:text-base rounded-md text-white font-semibold bg-gray-800 hover:bg-gray-600"
+              >
+                {hasRequested ? (
+                  <>
+                    <FaTimes className="text-white" /> {/* Withdraw icon */}
+                    <span className="hidden sm:inline">
+                      Withdraw Request
+                    </span>{" "}
+                    {/* Hide on small screens */}
+                  </>
+                ) : (
+                  <>
+                    <FaPaperPlane className="text-white" />{" "}
+                    {/* Paper plane icon */}
+                    <span className="hidden sm:inline">
+                      Request Landowner
+                    </span>{" "}
+                    {/* Hide on small screens */}
+                  </>
+                )}
+              </button>
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>
