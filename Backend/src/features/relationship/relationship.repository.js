@@ -9,6 +9,7 @@ const roomRepository = new RoomRepository();
 const requestRepository = new RequestRepository();
 
 class RelationshipSchma {
+  //repository of accept the request of the renters
   async acceptRequest(acceptObj) {
     const newRelationShip = new relationshipModel(acceptObj);
     const { roomId } = acceptObj;
@@ -16,6 +17,15 @@ class RelationshipSchma {
     const request = await requestRepository.deleteAllRequest(roomId);
     await newRelationShip.save();
     return newRelationShip;
+  }
+
+  //repository to get all the renters profile based of room and lanowner id
+  async getRentersDetail(ownerId) {
+    const findRelations = await relationshipModel
+      .find({ ownerId })
+      .populate("renterId");
+    let renters = findRelations.map((rel) => rel.renterId);
+    return renters;
   }
 }
 

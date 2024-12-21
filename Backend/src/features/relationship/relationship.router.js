@@ -12,8 +12,13 @@ relationshipRouter.post("/accept", landOwnerAuth, (req, res) => {
 });
 
 //route to reject the request of the renters
-relationshipRouter.post("/reject", (req, res) => {
+relationshipRouter.post("/reject", landOwnerAuth, (req, res) => {
   relationshipController.rejectRequest(req, res);
+});
+
+//route to get all the details of the renters from relationship as array
+relationshipRouter.get("/getRenters", landOwnerAuth, (req, res) => {
+  relationshipController.getRenters(req, res);
 });
 
 export default relationshipRouter;

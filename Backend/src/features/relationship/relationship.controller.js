@@ -6,6 +6,7 @@ class RelationshipController {
     this.relaltionshipRepository = new RelationshipSchma();
     this.requestRepository = new RequestRepository();
   }
+
   async accept(req, res) {
     const ownerId = req.userId;
     const { roomId, renterId } = req.body;
@@ -43,6 +44,23 @@ class RelationshipController {
         message: "Something went wrong with database",
       });
     }
+  }
+
+  async getRenters(req, res) {
+    const ownerId = req.userId;
+    try {
+      const renters = await this.relaltionshipRepository.getRentersDetail(
+        ownerId
+      );
+      return res.status(200).json({ success: true, renters: renters });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong with database",
+      });
+    }
+    // const users = await this.relaltionshipRepository.getRentersDetail();
   }
 }
 
