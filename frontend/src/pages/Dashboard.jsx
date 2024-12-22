@@ -6,9 +6,8 @@ import {
   FaMoneyBillAlt,
   FaSearch,
   FaStar,
-  FaUserAstronaut,
-  FaUserFriends,
   FaHouseUser,
+  FaArchive,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -78,6 +77,20 @@ const Dashboard = () => {
               </h2>
               <p className="text-gray-600 text-center">
                 Add and manage renters here with ease
+              </p>
+            </Link>
+            <Link
+              to="/archieved-renters"
+              className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center hover:shadow-lg transition-shadow duration-300"
+            >
+              <div className="text-4xl bg-blue-100 p-4 rounded-full mb-4">
+                <FaArchive className="text-red-600" />
+              </div>
+              <h2 className="text-xl font-semibold text-gray-700 mb-2">
+                Archived Renters
+              </h2>
+              <p className="text-gray-600 text-center">
+                You can see the Achived Renters here
               </p>
             </Link>
           </>

@@ -68,7 +68,7 @@ const MyRenters = () => {
                 </span>
                 <br></br>
                 <span className="text-2xl font-bold">
-                  Rent Price : {renter.roomDetails.rentPrice}
+                  Rent Price : ₹{renter.roomDetails.rentPrice}
                 </span>
               </div>
             </div>

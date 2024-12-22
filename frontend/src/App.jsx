@@ -9,6 +9,7 @@ import PaymentHistory from "./pages/landownerPages/PaymentHistory";
 import MyRenters from "./pages/landownerPages/MyRenters";
 import Loading from "./components/UI/Loading";
 import AuthenticatedUser from "./components/Auth/AuthenticatedUser";
+import ArchievedRenters from "./pages/landownerPages/ArchievedRenters";
 
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const LandOwnerRooms = React.lazy(() =>
@@ -86,6 +87,7 @@ const App = () => {
                 <Route path="/landowner-rooms" element={<LandOwnerRooms />} />
                 <Route path="/my-renters" element={<MyRenters />} />
                 <Route path="/incoming-request" element=<IncommingRequest /> />
+                <Route path="/archieved-renters" element=<ArchievedRenters /> />
               </Route>
 
               {/* Protected Routes for all users  */}
