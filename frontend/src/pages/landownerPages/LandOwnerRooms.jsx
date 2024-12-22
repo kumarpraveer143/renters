@@ -34,9 +34,22 @@ const LandOwnerRooms = () => {
 
   const handleSaveClick = async (roomId) => {
     const updatedRoom = rooms.find((room) => room._id === roomId);
-    // console.log("Updated Room Data:", updatedRoom);
 
     try {
+      const res = await axios.post(
+        `${API_URL}/relationship/isRelationship`,
+        { roomId },
+        {
+          withCredentials: true,
+        }
+      );
+      let isRoomInRelation = res.data.renters;
+
+      if (updatedRoom.isAvailable && isRoomInRelation) {
+        toast.error("You have renters in your exsiting room!");
+        return;
+      }
+
       const response = await axios.put(
         `${API_URL}/rooms/${roomId}`,
         updatedRoom,
@@ -114,6 +127,21 @@ const LandOwnerRooms = () => {
       rooms.map((room) => {
         if (room._id === roomId) {
           return { ...room, isAvailable: checked };
+        }
+        return room;
+      })
+    );
+  };
+
+  const handleChange = (e, field) => {
+    const { value } = e.target;
+    setRooms(
+      rooms.map((room) => {
+        if (room._id === editingRoom) {
+          return {
+            ...room,
+            [field]: value,
+          };
         }
         return room;
       })

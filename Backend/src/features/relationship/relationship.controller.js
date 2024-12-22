@@ -62,6 +62,23 @@ class RelationshipController {
     }
     // const users = await this.relaltionshipRepository.getRentersDetail();
   }
+
+  async isRoomAvailable(req, res) {
+    const roomId = req.body.roomId;
+    try {
+      const room = await this.relaltionshipRepository.findRelationByRoomId(
+        roomId
+      );
+      let result = room ? true : false;
+      return res.status(200).json({ success: true, renters: result });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong with database",
+      });
+    }
+  }
 }
 
 export default RelationshipController;

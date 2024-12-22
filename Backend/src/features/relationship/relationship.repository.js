@@ -23,9 +23,27 @@ class RelationshipSchma {
   async getRentersDetail(ownerId) {
     const findRelations = await relationshipModel
       .find({ ownerId })
-      .populate("renterId");
-    let renters = findRelations.map((rel) => rel.renterId);
-    return renters;
+      .populate("renterId")
+      .populate("roomId");
+
+    const extractedDetails = findRelations.map((item) => ({
+      relationId: item._id,
+      renterDetails: item.renterId,
+      roomDetails: {
+        roomId: item.roomId._id,
+        roomType: item.roomId.roomType,
+        rentPrice: item.roomId.rentPrice,
+      },
+    }));
+
+    // let renters = findRelations.map((rel) => rel.renterId);
+    return extractedDetails;
+  }
+
+  //find if a room is there in relation or not
+  async findRelationByRoomId(roomId) {
+    const relation = await relationshipModel.findOne({ roomId });
+    return relation;
   }
 }
 

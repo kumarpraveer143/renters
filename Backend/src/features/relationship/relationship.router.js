@@ -21,4 +21,9 @@ relationshipRouter.get("/getRenters", landOwnerAuth, (req, res) => {
   relationshipController.getRenters(req, res);
 });
 
+//route to get if the relation exist or not!
+relationshipRouter.post("/isRelationship", landOwnerAuth, (req, res) => {
+  relationshipController.isRoomAvailable(req, res);
+});
+
 export default relationshipRouter;
