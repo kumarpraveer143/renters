@@ -11,7 +11,7 @@ const Developer = () => {
           data-aos="fade-right"
         >
           <img
-            src="images/myPhoto2.jpeg"
+            src="images/myPhoto.jpeg"
             alt="Developer"
             className="rounded-lg shadow-lg w-80 h-100 object-cover hover:scale-105 transition-transform duration-300"
           />

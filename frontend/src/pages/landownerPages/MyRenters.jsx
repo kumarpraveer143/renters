@@ -29,6 +29,7 @@ const MyRenters = () => {
 
   const handleAddRent = () => {
     console.log("Add Rent button clicked");
+    console.log(renters);
   };
   const handleRemoveRenter = async (relationId) => {
     const result = await Swal.fire({
