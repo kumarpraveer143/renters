@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { FaHistory, FaMoneyBillWave, FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
 import { API_URL } from "../../config";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import NoRenters from "./NoRenters";
 
 const MyRenters = () => {
   const [renters, setRenters] = useState([]);
@@ -11,7 +14,11 @@ const MyRenters = () => {
       let response = await axios.get(`${API_URL}/relationship/getRenters`, {
         withCredentials: true,
       });
-      setRenters(response.data.renters);
+      // console.log(response.data.renters[0].renterStatus);
+      let activeRenters = response.data.renters.filter(
+        (item) => item.renterStatus === "active"
+      );
+      setRenters(activeRenters);
     };
     data();
   }, []);
@@ -23,10 +30,37 @@ const MyRenters = () => {
   const handleAddRent = () => {
     console.log("Add Rent button clicked");
   };
+  const handleRemoveRenter = async (relationId) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "This action will permanently remove the renter!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, remove it!",
+      cancelButtonText: "Cancel",
+    });
 
-  const handleRemoveRenter = () => {
-    console.log("Remove Renter button clicked");
+    if (result.isConfirmed) {
+      try {
+        const response = await axios.post(
+          `${API_URL}/relationship/removeRenter`,
+          { relationId },
+          { withCredentials: true }
+        );
+
+        toast.success("Renter removed successfully!");
+      } catch (err) {
+        console.error(err);
+        toast.error("Failed to remove renter. Please try again.");
+      }
+    }
   };
+
+  if (renters.length === 0) {
+    return <NoRenters />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -62,7 +96,14 @@ const MyRenters = () => {
                 {renter.renterDetails.homeAddress.state} -{" "}
                 {renter.renterDetails.homeAddress.zipCode}
               </p>
-              <div className="mt-4">
+              <div className="mt-2">
+                <div className="mb-4">
+                  Room Number :
+                  <span className="text-2xl text-red-600 font-semibold">
+                    {renter.roomDetails.roomNumber}
+                  </span>
+                </div>
+
                 <span className="text-red-600 font-bold">
                   {renter.roomDetails.roomType} room
                 </span>
@@ -95,7 +136,7 @@ const MyRenters = () => {
               </button>
               <button
                 className="relative flex items-center justify-center bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 md:px-6 md:justify-start group"
-                onClick={handleRemoveRenter}
+                onClick={() => handleRemoveRenter(renter.relationId)}
               >
                 <FaTrashAlt className="mr-2" />
                 <span className="hidden md:inline">Remove Renter</span>

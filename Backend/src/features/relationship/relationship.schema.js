@@ -7,7 +7,7 @@ const relationshipSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    
+
     renterId: {
       type: mongoose.Types.ObjectId,
       ref: "User",
@@ -18,6 +18,13 @@ const relationshipSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "Room",
       required: true,
+    },
+
+    status: {
+      type: String,
+      required: true,
+      enum: ["active", "archive"],
+      default: "active",
     },
 
     historyId: {

@@ -63,14 +63,33 @@ class RelationshipController {
     // const users = await this.relaltionshipRepository.getRentersDetail();
   }
 
+  //is the room is available or not!
   async isRoomAvailable(req, res) {
     const roomId = req.body.roomId;
     try {
       const room = await this.relaltionshipRepository.findRelationByRoomId(
         roomId
       );
-      let result = room ? true : false;
+      let result = room?.status === "active" ? true : false;
       return res.status(200).json({ success: true, renters: result });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong with database",
+      });
+    }
+  }
+
+  async removeRenter(req, res) {
+    let { relationId } = req.body;
+    try {
+      const relation = await this.relaltionshipRepository.changeStatus(
+        relationId
+      );
+      return res
+        .status(200)
+        .json({ success: true, relation: "Renter Archived!" });
     } catch (err) {
       console.log(err);
       return res.status(500).json({

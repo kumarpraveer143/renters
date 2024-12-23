@@ -26,7 +26,6 @@ const IncomingRequest = (props) => {
   // Handlers for accept/reject
   const handleAccept = async (id) => {
     let roomId = location.state.roomId;
-    console.log(id);
     try {
       const response = await axios.post(
         `${API_URL}/relationship/accept`,

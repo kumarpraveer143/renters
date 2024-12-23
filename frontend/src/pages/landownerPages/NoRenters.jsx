@@ -1,0 +1,24 @@
+import React from "react";
+import { MdOutlineGroupOff } from "react-icons/md";
+
+const NoRenters = () => {
+  return (
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-100 text-gray-700">
+      <div className="flex flex-col items-center text-center">
+        <MdOutlineGroupOff className="text-6xl text-gray-500 mb-4" />
+        <h1 className="text-2xl font-bold mb-2">No Renters Found</h1>
+        <p className="text-gray-500 mb-4">
+          There are currently no renters in this room.
+        </p>
+        <button
+          className="px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-600 transition duration-300"
+          onClick={() => alert("Add Renters functionality here!")}
+        >
+          Add Renters
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default NoRenters;

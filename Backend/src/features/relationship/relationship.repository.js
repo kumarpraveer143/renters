@@ -27,9 +27,11 @@ class RelationshipSchma {
       .populate("roomId");
 
     const extractedDetails = findRelations.map((item) => ({
+      renterStatus: item.status,
       relationId: item._id,
       renterDetails: item.renterId,
       roomDetails: {
+        roomNumber: item.roomId.roomNumber,
         roomId: item.roomId._id,
         roomType: item.roomId.roomType,
         rentPrice: item.roomId.rentPrice,
@@ -43,6 +45,14 @@ class RelationshipSchma {
   //find if a room is there in relation or not
   async findRelationByRoomId(roomId) {
     const relation = await relationshipModel.findOne({ roomId });
+    return relation;
+  }
+
+  //remove the renters from the landowner house
+  async changeStatus(relationId) {
+    const relation = await relationshipModel.findOne({ _id: relationId });
+    relation.status = "archive";
+    await relation.save();
     return relation;
   }
 }

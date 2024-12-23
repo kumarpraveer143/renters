@@ -160,7 +160,10 @@ const LandOwnerRooms = () => {
           className="w-full bg-white rounded-lg shadow-lg overflow-hidden"
         >
           <div className="p-5">
-            <h3 className="text-xl font-semibold text-gray-800">
+            <div className="font-semibold text-red-800 text-xl">
+              Room Number : {room.roomNumber}
+            </div>
+            <h3 className="text font-semibold text-gray-800 mt-4">
               Room Type: {room.roomType}
             </h3>
 

@@ -26,4 +26,9 @@ relationshipRouter.post("/isRelationship", landOwnerAuth, (req, res) => {
   relationshipController.isRoomAvailable(req, res);
 });
 
+//route to remove renters from the relationship (Archieve the renters)
+relationshipRouter.post("/removeRenter", landOwnerAuth, (req, res) => {
+  relationshipController.removeRenter(req, res);
+});
+
 export default relationshipRouter;
