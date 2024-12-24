@@ -87,9 +87,29 @@ class RelationshipController {
       const relation = await this.relaltionshipRepository.changeStatus(
         relationId
       );
+      console.log(relation);
       return res
         .status(200)
         .json({ success: true, relation: "Renter Archived!" });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong with database",
+      });
+    }
+  }
+
+  //controller to delete relation.
+  async deleteRenter(req, res) {
+    const relationId = req.params.id;
+    try {
+      const deletedUser = await this.relaltionshipRepository.deleteRenter(
+        relationId
+      );
+      return res
+        .status(200)
+        .json({ success: true, deletedRelation: deletedUser });
     } catch (err) {
       console.log(err);
       return res.status(500).json({

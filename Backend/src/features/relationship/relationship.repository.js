@@ -55,6 +55,14 @@ class RelationshipSchma {
     await relation.save();
     return relation;
   }
+
+  //delete relations
+  async deleteRenter(relationId) {
+    const deletedRelation = await relationshipModel.findOneAndDelete({
+      _id: relationId,
+    });
+    return deletedRelation;
+  }
 }
 
 export default RelationshipSchma;

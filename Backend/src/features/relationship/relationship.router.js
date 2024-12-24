@@ -31,4 +31,9 @@ relationshipRouter.post("/removeRenter", landOwnerAuth, (req, res) => {
   relationshipController.removeRenter(req, res);
 });
 
+//permanently delete the relationship with history
+relationshipRouter.delete("/deleteRenter/:id", landOwnerAuth, (req, res) => {
+  relationshipController.deleteRenter(req, res);
+});
+
 export default relationshipRouter;

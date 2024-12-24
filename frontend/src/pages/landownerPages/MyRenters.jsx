@@ -29,17 +29,18 @@ const MyRenters = () => {
 
   const handleAddRent = () => {
     console.log("Add Rent button clicked");
-    console.log(renters);
+    // console.log(renters);
   };
+
   const handleRemoveRenter = async (relationId) => {
     const result = await Swal.fire({
       title: "Are you sure?",
-      text: "This action will permanently remove the renter!",
+      text: "This action will Archive renter!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, remove it!",
+      confirmButtonText: "Yes, Archive it!",
       cancelButtonText: "Cancel",
     });
 
@@ -50,6 +51,12 @@ const MyRenters = () => {
           { relationId },
           { withCredentials: true }
         );
+
+        if (response.status === 200) {
+          setRenters((prevRenters) =>
+            prevRenters.filter((renter) => renter.relationId !== relationId)
+          );
+        }
 
         toast.success("Renter removed successfully!");
       } catch (err) {

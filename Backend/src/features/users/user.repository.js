@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const userModel = mongoose.model("User", UserSchema);
 
 export default class UserRepository {
-  //register user controller
+  //register user repository
   async registerUser(userObj) {
     const user = new userModel(userObj);
     await user.save();
@@ -17,7 +17,7 @@ export default class UserRepository {
     return user;
   }
 
-  //find user by email controller
+  //find user by email repository
   async findUserByEmail(factor, withPassword = false) {
     if (withPassword)
       return await userModel.findOne(factor).select("+password");
