@@ -21,6 +21,19 @@ class HistoryRepository {
     const history = HistoryModel.find({ relationId }).sort({ date: -1 });
     return history;
   }
+
+  async updateHisotry(historyId, updatedHistory) {
+    const history = await HistoryModel.findOneAndUpdate(
+      { _id: historyId },
+      { ...updatedHistory }
+    );
+    return history;
+  }
+
+  async deleteHistory(id) {
+    const history = await HistoryModel.findOneAndDelete({ _id: id });
+    return history;
+  }
 }
 
 export default HistoryRepository;

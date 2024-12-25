@@ -35,8 +35,42 @@ class HistoryController {
     }
   }
 
-  async updateHistory(req, res) {
-    let { historyId } = req.params;
+  async updateRenterHistory(req, res) {
+    const { historyId } = req.params;
+    const newData = req.body;
+    try {
+      const updatedHistory = await this.historyRepository.updateHisotry(
+        historyId,
+        newData
+      );
+      return res
+        .status(200)
+        .json({ success: true, updatedHistory: updatedHistory });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
+  }
+
+  async delelteHistory(req, res) {
+    const { historyId } = req.params;
+    try {
+      const deltedHistory = await this.historyRepository.deleteHistory(
+        historyId
+      );
+      return res
+        .status(200)
+        .json({ success: true, deltedHistory: deltedHistory });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
   }
 }
 

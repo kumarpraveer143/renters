@@ -10,12 +10,12 @@ const NoRenters = () => {
         <p className="text-gray-500 mb-4">
           There are currently no renters in this room.
         </p>
-        <button
+        {/* <button
           className="px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-600 transition duration-300"
           onClick={() => alert("Add Renters functionality here!")}
         >
           Add Renters
-        </button>
+        </button> */}
       </div>
     </div>
   );

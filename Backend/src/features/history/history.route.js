@@ -14,5 +14,15 @@ historyRouter.get("/:relationId", (req, res) => {
   historyController.getRenterHistory(req, res);
 });
 
+//update the history route
+historyRouter.patch("/:historyId", (req, res) => {
+  historyController.updateRenterHistory(req, res);
+});
+
+//delte the histroy route
+historyRouter.delete("/:historyId", (req, res) => {
+  historyController.delelteHistory(req, res);
+});
+
 // historyRouter.patch("/updatePaymentHistory/:renterID", (req, response) => {});
 export default historyRouter;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -145,12 +145,19 @@ const AddRent = () => {
           />
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
-        >
-          Submit
-        </button>
+        <div className="">
+          <button
+            type="submit"
+            className="w-full bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
+          >
+            Submit
+          </button>
+          <Link to="/my-renters">
+            <button className=" mt-4 w-full bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400">
+              Back
+            </button>
+          </Link>
+        </div>
       </form>
     </div>
   );
