@@ -9,6 +9,7 @@ import PaymentHistory from "./pages/landownerPages/PaymentHistory";
 import MyRenters from "./pages/landownerPages/MyRenters";
 import Loading from "./components/UI/Loading";
 import AuthenticatedUser from "./components/Auth/AuthenticatedUser";
+import RenterMyRoom from "./pages/rentersPages/RenterMyRoom";
 
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const LandOwnerRooms = React.lazy(() =>
@@ -27,11 +28,15 @@ const Profile = React.lazy(() => import("./pages/Profile"));
 const PageNotFound = React.lazy(() => import("./pages/PageNotFound"));
 const UploadRooms = React.lazy(() => import("./pages/UploadRooms"));
 const Layout = React.lazy(() => import("./components/layouts/Layout"));
-import ArchievedRenters from "./pages/landownerPages/ArchievedRenters";
-import NoRenters from "./pages/landownerPages/NoRenters";
-import AddRent from "./pages/landownerPages/AddRent";
-import CheckHistory from "./pages/landownerPages/CheckHistory";
-import NoHistory from "./pages/landownerPages/NoHistory";
+const ArchievedRenters = React.lazy(() =>
+  import("./pages/landownerPages/ArchievedRenters")
+);
+const NoRenters = React.lazy(() => import("./pages/landownerPages/NoRenters"));
+const AddRent = React.lazy(() => import("./pages/landownerPages/AddRent"));
+const CheckHistory = React.lazy(() =>
+  import("./pages/landownerPages/CheckHistory")
+);
+const NoHistory = React.lazy(() => import("./pages/landownerPages/NoHistory"));
 
 const ProtectedRoute = React.lazy(() =>
   import("./components/Auth/ProtectedRoute")
@@ -78,6 +83,7 @@ const App = () => {
               {/* Routes for only Renters */}
               <Route element={<RentersAuth />}>
                 <Route path="/findrooms" element={<FindRooms />} />
+                <Route path="/rentersMyRoom" element={<RenterMyRoom />} />
                 <Route
                   path="/viewRoomsDetails/:id"
                   element={<ViewRoomDetails />}

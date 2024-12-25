@@ -1,6 +1,7 @@
 import express from "express";
 import RelationshipController from "./relationship.controller.js";
 import landOwnerAuth from "../../middleware/landOwners.js";
+import jwtAuth from "../../middleware/jwtAuth.js";
 
 const relationshipRouter = express.Router();
 
@@ -31,9 +32,19 @@ relationshipRouter.post("/removeRenter", landOwnerAuth, (req, res) => {
   relationshipController.removeRenter(req, res);
 });
 
-//permanently delete the relationship with history
+//route to permanently delete the relationship with history
 relationshipRouter.delete("/deleteRenter/:id", landOwnerAuth, (req, res) => {
   relationshipController.deleteRenter(req, res);
+});
+
+//route get the room details of the particular renters
+relationshipRouter.get("/getRoomDetails", jwtAuth, (req, res) => {
+  relationshipController.getRoomDetailsByRenterId(req, res);
+});
+
+//route to get all the history of a particular renters
+relationshipRouter.get("/historyOfRenter", jwtAuth, (req, res) => {
+  relationshipController.getHistoryOfRenter(req, res);
 });
 
 export default relationshipRouter;

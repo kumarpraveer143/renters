@@ -69,12 +69,6 @@ const RoomSchema = new mongoose.Schema(
       required: true,
     },
 
-    //   who the fuck are the renters
-    renters: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-
     isAvailable: {
       type: Boolean,
       default: true,

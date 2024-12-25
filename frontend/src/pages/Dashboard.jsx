@@ -8,6 +8,7 @@ import {
   FaStar,
   FaHouseUser,
   FaArchive,
+  FaHouseDamage,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -116,13 +117,28 @@ const Dashboard = () => {
               className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center hover:shadow-lg transition-shadow duration-300"
             >
               <div className="text-4xl bg-blue-100 p-4 rounded-full mb-4">
-                <FaStar className="text-purple-500" />
+                <FaStar className="text-green-500" />
               </div>
               <h2 className="text-xl font-semibold text-gray-700 mb-2">
                 Favourite Rooms
               </h2>
               <p className="text-gray-600 text-center">
-                Add new rooms to your listings with ease.
+                Your Favourite Rooms are here!
+              </p>
+            </Link>
+
+            <Link
+              to="/rentersMyRoom"
+              className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center hover:shadow-lg transition-shadow duration-300"
+            >
+              <div className="text-4xl bg-blue-100 p-4 rounded-full mb-4">
+                <FaHouseUser className="text-red-500" />
+              </div>
+              <h2 className="text-xl font-semibold text-gray-700 mb-2">
+                My Room
+              </h2>
+              <p className="text-gray-600 text-center">
+                Details and Payment history updated by owner!{" "}
               </p>
             </Link>
           </>

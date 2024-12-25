@@ -119,7 +119,7 @@ const CheckHistory = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Rent History</h1>
       <div className="overflow-x-auto">
-        <table className="min-w-full table-auto border-collapse border border-gray-300">
+        <table className="w-full table-auto border-collapse border border-gray-300">
           <thead>
             <tr className="bg-gray-800 text-white">
               <th className="border border-gray-300 px-4 py-2 text-left">
@@ -223,7 +223,7 @@ const CheckHistory = () => {
                       </button>
                       <button
                         onClick={() => handleDelete(rent._id)}
-                        className="bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded"
+                        className="bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded mr-2 "
                       >
                         <FaTrash />
                       </button>

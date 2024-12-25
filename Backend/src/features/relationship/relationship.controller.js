@@ -117,6 +117,36 @@ class RelationshipController {
       });
     }
   }
+
+  async getRoomDetailsByRenterId(req, res) {
+    let { userId } = req.cookies;
+    try {
+      const room = await this.relaltionshipRepository.getRoomDetails(userId);
+      return res.status(200).json({ success: true, room: room });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong with database",
+      });
+    }
+  }
+
+  async getHistoryOfRenter(req, res) {
+    let { userId } = req.cookies;
+    try {
+      const histories = await this.relaltionshipRepository.getHistoriesOfRenter(
+        userId
+      );
+      return res.status(200).json({ success: true, histories: histories });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong with database",
+      });
+    }
+  }
 }
 
 export default RelationshipController;

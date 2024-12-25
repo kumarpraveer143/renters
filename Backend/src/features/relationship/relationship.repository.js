@@ -2,8 +2,10 @@ import mongoose from "mongoose";
 import relationshipSchema from "./relationship.schema.js";
 import RoomRepository from "../rooms/room.repository.js";
 import RequestRepository from "../request/request.respository.js";
+import HistorySchema from "../history/history.schema.js";
 
 const relationshipModel = mongoose.model("relationship", relationshipSchema);
+const historyModel = mongoose.model("history", HistorySchema);
 
 const roomRepository = new RoomRepository();
 const requestRepository = new RequestRepository();
@@ -62,6 +64,28 @@ class RelationshipSchma {
       _id: relationId,
     });
     return deletedRelation;
+  }
+
+  //get details of room
+  async getRoomDetails(userId) {
+    const room = await relationshipModel
+      .findOne({
+        renterId: userId,
+        status: "active",
+      })
+      .populate("renterId");
+    return room.renterId;
+  }
+
+  //get histories of renter by renter id
+  async getHistoriesOfRenter(userId) {
+    const relation = await relationshipModel.findOne({
+      renterId: userId,
+      status: "active",
+    });
+    let relationId = relation._id;
+    const history = await historyModel.find({ relationId });
+    return history;
   }
 }
 

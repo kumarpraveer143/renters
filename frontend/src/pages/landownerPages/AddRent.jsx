@@ -28,7 +28,6 @@ const AddRent = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     try {
       const response = await axios.post(
         `${API_URL}/history/${relationId}`,
