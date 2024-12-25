@@ -29,6 +29,9 @@ const UploadRooms = React.lazy(() => import("./pages/UploadRooms"));
 const Layout = React.lazy(() => import("./components/layouts/Layout"));
 import ArchievedRenters from "./pages/landownerPages/ArchievedRenters";
 import NoRenters from "./pages/landownerPages/NoRenters";
+import AddRent from "./pages/landownerPages/AddRent";
+import CheckHistory from "./pages/landownerPages/CheckHistory";
+import NoHistory from "./pages/landownerPages/NoHistory";
 
 const ProtectedRoute = React.lazy(() =>
   import("./components/Auth/ProtectedRoute")
@@ -88,6 +91,12 @@ const App = () => {
                 <Route path="/uploadrooms" element={<UploadRooms />} />
                 <Route path="/landowner-rooms" element={<LandOwnerRooms />} />
                 <Route path="/my-renters" element={<MyRenters />} />
+                <Route path="/add-rent/:relationId" element={<AddRent />} />
+                <Route path="/no-history" element={<NoHistory />} />
+                <Route
+                  path="check-history/:relationId"
+                  element={<CheckHistory />}
+                />
                 <Route
                   path="/incoming-request"
                   element={<IncommingRequest />}

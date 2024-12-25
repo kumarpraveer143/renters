@@ -1,17 +1,18 @@
 import express from "express";
+import HistoryController from "./history.controller.js";
 const historyRouter = express.Router();
 
+const historyController = new HistoryController();
+
 // get all history => /history
-historyRouter.get("/", (req, response) => {
-  response.send("History list");
+historyRouter.post("/:relationId", (req, res) => {
+  historyController.createHistory(req, res);
 });
 
-// history based on renter id
-historyRouter.get("/:renterID", (req, response) => {});
+// get renter payment history
+historyRouter.get("/:relationId", (req, res) => {
+  historyController.getRenterHistory(req, res);
+});
 
-// history based on owner id
-historyRouter.get("/:ownerID", (req, response) => {});
-
-// update renter payment history
-historyRouter.patch("/updatePaymentHistory/:renterID", (req, response) => {});
+// historyRouter.patch("/updatePaymentHistory/:renterID", (req, response) => {});
 export default historyRouter;

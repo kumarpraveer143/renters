@@ -1,28 +1,26 @@
-import HistoryRepository from "./history.schema";
 import mongoose from "mongoose";
+import HistorySchema from "./history.schema.js";
 
-const HistoryModel = mongoose.model("History" , HistoryRepository);
+const HistoryModel = mongoose.model("History", HistorySchema);
 
 class HistoryRepository {
-    // todo :: making a 
-    async createHistory(history){
-        const history = new HistoryModel(history);
-        await history.save();
-        return history;
+  async createHistory(historyObj) {
+    try {
+      const history = new HistoryModel(historyObj);
+      await history.save();
+      return history;
+    } catch (err) {
+      if (err.code === 11000) {
+        throw new Error("This relation already exists.");
+      }
+      throw err;
     }
+  }
 
-    // todo :: return all history records
-    async allHistory(){
-        return await HistoryModel.find({});
-    }
-
-    // todo :: return histroy of landowner
-    async ownerHistory(ownerID){
-        return await HistoryModel.find({ownerID});
-    }
-
-    // todo :: return histroy of renter
-    async ownerHistory(renter){
-        return await HistoryModel.find({renter});
-    }
+  async getRenterHistory(relationId) {
+    const history = HistoryModel.find({ relationId }).sort({ date: -1 });
+    return history;
+  }
 }
+
+export default HistoryRepository;

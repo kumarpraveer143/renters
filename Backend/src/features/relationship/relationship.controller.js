@@ -87,7 +87,6 @@ class RelationshipController {
       const relation = await this.relaltionshipRepository.changeStatus(
         relationId
       );
-      console.log(relation);
       return res
         .status(200)
         .json({ success: true, relation: "Renter Archived!" });

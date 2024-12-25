@@ -1,12 +1,37 @@
 import mongoose from "mongoose";
 
-const historySchema = new Schema({
-  relationId: {
-    type: mongoose.Types.ObjectId,
-    required: true,
+const { Schema } = mongoose;
+
+const HistorySchema = new Schema(
+  {
+    relationId: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: "Relation",
+    },
+
+    rentPaid: {
+      type: Number,
+      required: true,
+    },
+
+    date: {
+      type: Date,
+      required: true,
+    },
+    paymentMethod: {
+      type: String,
+      enum: ["Cash", "Online", "other"],
+      default: "other",
+    },
+    remarks: {
+      type: String,
+      maxlength: 500,
+    },
   },
-});
+  {
+    timestamps: true,
+  }
+);
 
-const History = mongoose.model("History", historySchema);
-
-module.exports = History;
+export default HistorySchema;

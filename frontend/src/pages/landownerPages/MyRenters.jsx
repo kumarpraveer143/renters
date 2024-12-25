@@ -5,10 +5,11 @@ import { API_URL } from "../../config";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import NoRenters from "./NoRenters";
+import { useNavigate } from "react-router-dom";
 
 const MyRenters = () => {
   const [renters, setRenters] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const data = async () => {
       let response = await axios.get(`${API_URL}/relationship/getRenters`, {
@@ -23,13 +24,16 @@ const MyRenters = () => {
     data();
   }, []);
 
-  const handleCheckHistory = () => {
-    console.log("Check History button clicked");
+  const handleCheckHistory = (relationId) => {
+    navigate(`/check-history/${relationId}`);
   };
 
-  const handleAddRent = () => {
-    console.log("Add Rent button clicked");
-    // console.log(renters);
+  const handleAddRent = (relationId, rentPrice) => {
+    navigate(`/add-rent/${relationId}`, {
+      state: {
+        rentPrice,
+      },
+    });
   };
 
   const handleRemoveRenter = async (relationId) => {
@@ -124,7 +128,7 @@ const MyRenters = () => {
             <div className="mt-4 md:mt-0 flex space-x-4">
               <button
                 className="relative flex items-center justify-center bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 md:px-6 md:justify-start group"
-                onClick={handleCheckHistory}
+                onClick={() => handleCheckHistory(renter.relationId)}
               >
                 <FaHistory className="mr-2" />
                 <span className="hidden md:inline">Check History</span>
@@ -134,7 +138,9 @@ const MyRenters = () => {
               </button>
               <button
                 className="relative flex items-center justify-center bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 md:px-6 md:justify-start group"
-                onClick={handleAddRent}
+                onClick={() =>
+                  handleAddRent(renter.relationId, renter.roomDetails.rentPrice)
+                }
               >
                 <FaMoneyBillWave className="mr-2" />
                 <span className="hidden md:inline">Add Rent</span>
