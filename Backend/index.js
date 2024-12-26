@@ -40,7 +40,7 @@ app.use("/api/favourite", favouriteRouter);
 app.use("/api/request", requestRouter);
 app.use("/api/relationship", relationshipRouter);
 
-app.listen(port, "0.0.0.0", () => {
+app.listen(port, () => {
   connectToMongoose();
   console.log("Server is up at the port ", port);
 });
