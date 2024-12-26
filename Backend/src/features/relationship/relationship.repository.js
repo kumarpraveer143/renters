@@ -73,8 +73,16 @@ class RelationshipSchma {
         renterId: userId,
         status: "active",
       })
-      .populate("renterId");
-    return room.renterId;
+      .populate("roomId")
+      .populate("ownerId");
+    let extractedData = {
+      houseName: room.ownerId.houseName,
+      ownerNumber: room.ownerId.phoneNumber,
+      ownerName: room.ownerId.name,
+      ownerEmail: room.ownerId.email,
+      roomDetails: room.roomId,
+    };
+    return extractedData;
   }
 
   //get histories of renter by renter id
@@ -84,7 +92,7 @@ class RelationshipSchma {
       status: "active",
     });
     let relationId = relation._id;
-    const history = await historyModel.find({ relationId });
+    const history = await historyModel.find({ relationId }).sort({ date: -1 });
     return history;
   }
 }

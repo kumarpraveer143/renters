@@ -49,6 +49,9 @@ const ViewRoomDetails = React.lazy(() => import("./pages/ViewRoomDetails"));
 const IncommingRequest = React.lazy(() =>
   import("./pages/landownerPages/IncommingRequest")
 );
+const RenterHistoryDetails = React.lazy(() =>
+  import("./pages/rentersPages/RenterHistoryDetails")
+);
 
 const App = () => {
   return (
@@ -87,6 +90,10 @@ const App = () => {
                 <Route
                   path="/viewRoomsDetails/:id"
                   element={<ViewRoomDetails />}
+                />
+                <Route
+                  path="/renter-history"
+                  element={<RenterHistoryDetails />}
                 />
                 <Route path="/favouriteRooms" element={<FavouriteRoom />} />
               </Route>
