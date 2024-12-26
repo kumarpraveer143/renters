@@ -15,7 +15,7 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-  origin: "https://renters-gsi44k1jh-renters-projects.vercel.app",
+  origin: "renters-eight.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
@@ -26,10 +26,6 @@ app.use(cors(corsOptions));
 const port = process.env.PORT;
 
 //Middlewares
-
-app.get("/", (req, res) => {
-  res.send("This is renter application");
-});
 
 app.use(bodyParser.json());
 app.use(cookieParser());
