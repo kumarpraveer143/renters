@@ -15,10 +15,8 @@ dotenv.config();
 const app = express();
 const corsOptions = {
   origin: (origin, callback) => {
-    const allowedOrigins = [
-      "https://renters-eight.vercel.app",
-      "https://renters-miy2elgzk-renters-projects.vercel.app",
-    ];
+    const allowedOrigins =
+      "https://renters-f2njf0efr-renters-projects.vercel.app";
     if (allowedOrigins.includes(origin) || !origin) {
       // Allow the origin
       callback(null, true);
