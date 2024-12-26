@@ -13,9 +13,20 @@ import relationshipRouter from "./src/features/relationship/relationship.router.
 dotenv.config();
 
 const app = express();
-
 const corsOptions = {
-  origin: "renters-eight.vercel.app",
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      "https://renters-eight.vercel.app",
+      "https://renters-miy2elgzk-renters-projects.vercel.app",
+    ];
+    if (allowedOrigins.includes(origin) || !origin) {
+      // Allow the origin
+      callback(null, true);
+    } else {
+      // Reject the origin
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
