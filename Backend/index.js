@@ -36,6 +36,10 @@ app.use(cors(corsOptions));
 
 const port = process.env.PORT;
 
+app.get("/", (req, res) => {
+  res.send("This is renter application!");
+});
+
 //Middlewares
 
 app.use(bodyParser.json());
