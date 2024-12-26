@@ -77,7 +77,7 @@ const sendWelcomeEmail = async (newUser) => {
             <p>We are thrilled to welcome you to our community! Your application has been received, and we are excited to help you find the perfect place to call home.</p>
             <p>If you have any questions, feel free to reach out to us at any time. We are here to assist you every step of the way.</p>
             <p>Thank you for choosing us!</p>
-            <p>Best Regards,</p>
+            <p>Warm Regards,</p>
             <p>The Team</p>
         </div>
         <div class="footer">
