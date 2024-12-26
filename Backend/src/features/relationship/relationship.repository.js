@@ -63,6 +63,9 @@ class RelationshipSchma {
     const deletedRelation = await relationshipModel.findOneAndDelete({
       _id: relationId,
     });
+    const deleteHistory = await historyModel.deleteMany({
+      relationId: relationId,
+    });
     return deletedRelation;
   }
 

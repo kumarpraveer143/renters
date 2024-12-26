@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import { API_URL } from "../../config";
 import { useNavigate } from "react-router-dom";
+import NoRoomsFound from "../NoRoomsFound";
 
 const RenterMyRoom = () => {
   const navigate = useNavigate();
@@ -38,11 +39,7 @@ const RenterMyRoom = () => {
   }, []);
 
   if (!room) {
-    return (
-      <div className="min-h-screen flex justify-center items-center text-gray-500">
-        Loading...
-      </div>
-    );
+    return <NoRoomsFound />;
   }
 
   const { houseName, ownerNumber, ownerName, ownerEmail, roomDetails } = room;
