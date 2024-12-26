@@ -16,7 +16,7 @@ const app = express();
 const corsOptions = {
   origin: (origin, callback) => {
     const allowedOrigins =
-      "https://renters-f2njf0efr-renters-projects.vercel.app";
+      "https://renters-f2njf0efr-renters-projects.vercel.app/";
     if (allowedOrigins.includes(origin) || !origin) {
       // Allow the origin
       callback(null, true);
