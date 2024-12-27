@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { FaUserCircle } from "react-icons/fa"; // Import user icon
+import { API_URL } from "../../config";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,7 +22,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/users/logout", {
+      const response = await fetch(`${API_URL}/users/logout`, {
         method: "POST",
         credentials: "include", // Include credentials to handle cookies
       });
