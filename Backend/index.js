@@ -14,19 +14,7 @@ dotenv.config();
 
 const app = express();
 const corsOptions = {
-  origin: (origin, callback) => {
-    const allowedOrigins =
-      "https://renters-f2njf0efr-renters-projects.vercel.app/";
-    if (allowedOrigins.includes(origin) || !origin) {
-      // Allow the origin
-      callback(null, true);
-    } else {
-      // Reject the origin
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  origin: "https://renters-8vii985d4-renters-projects.vercel.app",
   credentials: true,
 };
 
