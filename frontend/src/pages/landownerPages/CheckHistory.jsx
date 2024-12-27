@@ -6,15 +6,18 @@ import { Link, useParams } from "react-router-dom";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import Loading from "../../components/UI/Loading";
 
 const CheckHistory = () => {
   const [rentHistory, setRentHistory] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
   const [editedRent, setEditedRent] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const { relationId } = useParams();
 
   useEffect(() => {
+    setLoading(true);
     const fetchHistory = async () => {
       const response = await axios.get(`${API_URL}/history/${relationId}`, {
         withCredentials: true,
@@ -22,6 +25,7 @@ const CheckHistory = () => {
       setRentHistory(response.data.history);
     };
     fetchHistory();
+    setLoading(false);
   }, [relationId]);
 
   // Format the date to "Month Day, Year" format
@@ -110,6 +114,10 @@ const CheckHistory = () => {
     }
     setEditIndex(null);
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   if (rentHistory.length === 0) {
     return <NoHistory />;

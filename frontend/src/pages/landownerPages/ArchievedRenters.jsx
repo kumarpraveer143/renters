@@ -5,11 +5,14 @@ import { API_URL } from "../../config";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import NoRenters from "./NoRenters";
+import Loading from "../../components/UI/Loading";
 
 const ArchievedRenters = () => {
   const [renters, setRenters] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const data = async () => {
       let response = await axios.get(`${API_URL}/relationship/getRenters`, {
         withCredentials: true,
@@ -21,6 +24,7 @@ const ArchievedRenters = () => {
       setRenters(activeRenters);
     };
     data();
+    setLoading(true);
   }, []);
 
   const handleCheckHistory = () => {
@@ -65,6 +69,10 @@ const ArchievedRenters = () => {
       }
     }
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   if (renters.length === 0) {
     return <NoRenters />;

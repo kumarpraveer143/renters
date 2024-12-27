@@ -1,5 +1,6 @@
 import React from "react";
 import { MdOutlineGroupOff } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const NoRenters = () => {
   return (
@@ -10,12 +11,14 @@ const NoRenters = () => {
         <p className="text-gray-500 mb-4">
           There are currently no renters in this room.
         </p>
-        {/* <button
-          className="px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-600 transition duration-300"
-          onClick={() => alert("Add Renters functionality here!")}
-        >
-          Add Renters
-        </button> */}
+        <Link to="/dashboard">
+          <button
+            className="px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-600 transition duration-300"
+            onClick={() => alert("Add Renters functionality here!")}
+          >
+            Dashboard
+          </button>
+        </Link>
       </div>
     </div>
   );

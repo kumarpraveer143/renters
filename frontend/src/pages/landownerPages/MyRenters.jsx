@@ -6,11 +6,14 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import NoRenters from "./NoRenters";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/UI/Loading";
 
 const MyRenters = () => {
   const [renters, setRenters] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
+    setLoading(true);
     const data = async () => {
       let response = await axios.get(`${API_URL}/relationship/getRenters`, {
         withCredentials: true,
@@ -22,6 +25,7 @@ const MyRenters = () => {
       setRenters(activeRenters);
     };
     data();
+    setLoading(false);
   }, []);
 
   const handleCheckHistory = (relationId) => {
@@ -69,6 +73,10 @@ const MyRenters = () => {
       }
     }
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   if (renters.length === 0) {
     return <NoRenters />;
