@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
+import { API_URL } from "../../config";
 
 const handleLogout = async (navigate) => {
   try {
-    const response = await fetch("http://localhost:3000/api/users/logout", {
+    const response = await fetch(`${API_URL}/users/logout`, {
       method: "POST",
       credentials: "include", // Include credentials to handle cookies
     });
@@ -29,7 +30,6 @@ const AuthenticatedUser = () => {
     const token = Cookies.get("token");
 
     if (!token) {
-      // If no token is found, redirect to login
       handleLogout(navigate);
       return;
     }

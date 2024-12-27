@@ -6,13 +6,16 @@ import { API_URL } from "../../config";
 import Swal from "sweetalert2";
 import { FaBell, FaEdit, FaSave, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/UI/Loading";
 
 const LandOwnerRooms = () => {
   const [rooms, setRooms] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [editingRoom, setEditingRoom] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(true);
     const fetchRooms = async () => {
       try {
         const response = await axios.get(`${API_URL}/rooms/myRoom`, {
@@ -23,6 +26,7 @@ const LandOwnerRooms = () => {
         console.error("Error fetching rooms:", error);
         toast.error("Something went wrong!");
       }
+      setLoading(false);
     };
 
     fetchRooms();
@@ -148,6 +152,9 @@ const LandOwnerRooms = () => {
     );
   };
 
+  if (loading) {
+    return <Loading />;
+  }
   if (rooms.length === 0) {
     return <NoRoomsFound />;
   }
