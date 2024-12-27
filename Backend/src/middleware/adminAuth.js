@@ -10,7 +10,7 @@ function adminAuth(req, res, next) {
   }
 
   // console.log(payload.user.userType);
-  if (payload.user.userType !== "admin") {
+  if (payload.user?.userType !== "admin") {
     return res.status(404).send("Only accessed to admin!");
   }
   res.cookie("userData", payload);
