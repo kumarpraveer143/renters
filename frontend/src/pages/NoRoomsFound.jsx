@@ -7,7 +7,7 @@ const NoRoomsFound = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-8">
       <div className="text-center">
         {/* Icon */}
-        <FaRegSadTear className="text-blue-500 text-6xl sm:text-8xl md:text-9xl" />
+        <FaRegSadTear className="text-center text-blue-500 text-6xl sm:text-8xl md:text-9xl" />
 
         {/* Title */}
         <h1 className="mt-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800">
