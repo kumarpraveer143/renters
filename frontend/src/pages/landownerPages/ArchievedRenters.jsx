@@ -24,7 +24,7 @@ const ArchievedRenters = () => {
       setRenters(activeRenters);
     };
     data();
-    setLoading(true);
+    setLoading(false);
   }, []);
 
   const handleCheckHistory = () => {
