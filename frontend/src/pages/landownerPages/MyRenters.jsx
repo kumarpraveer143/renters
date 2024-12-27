@@ -11,6 +11,7 @@ import Loading from "../../components/UI/Loading";
 const MyRenters = () => {
   const [renters, setRenters] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   useEffect(() => {
     setLoading(true);
@@ -24,8 +25,8 @@ const MyRenters = () => {
       );
       setRenters(activeRenters);
     };
-    data();
     setLoading(false);
+    data();
   }, []);
 
   const handleCheckHistory = (relationId) => {
