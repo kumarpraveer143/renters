@@ -147,6 +147,24 @@ class RelationshipController {
       });
     }
   }
+
+  async engaged(req, res) {
+    let { userId } = req.cookies;
+    try {
+      const findRenterId = await this.relaltionshipRepository.isEngaged(userId);
+      if (findRenterId) {
+        return res.status(200).json({ success: true, message: true });
+      } else {
+        return res.status(200).json({ success: true, message: false });
+      }
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong with database",
+      });
+    }
+  }
 }
 
 export default RelationshipController;

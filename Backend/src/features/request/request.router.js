@@ -22,5 +22,4 @@ requestRouter.get("/users/:id", landOwnerAuth, (req, res) => {
   requestController.getUsers(req, res);
 });
 
-
 export default requestRouter;

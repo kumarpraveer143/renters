@@ -30,6 +30,7 @@ const RenterMyRoom = () => {
           }
         );
         setRoom(response.data.room);
+        console.log(response.data.room)
       } catch (error) {
         console.error("Error fetching room details:", error);
       }

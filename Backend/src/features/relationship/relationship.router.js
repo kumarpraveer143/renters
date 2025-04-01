@@ -47,4 +47,9 @@ relationshipRouter.get("/historyOfRenter", jwtAuth, (req, res) => {
   relationshipController.getHistoryOfRenter(req, res);
 });
 
+//route to see wheather the user is in some room or not!
+relationshipRouter.get("/engaged",jwtAuth,(req,res)=>{
+  relationshipController.engaged(req,res);
+})
+
 export default relationshipRouter;

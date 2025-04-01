@@ -10,11 +10,12 @@ import historyRouter from "./src/features/history/history.route.js";
 import favouriteRouter from "./src/features/favourite/favourite.route.js";
 import requestRouter from "./src/features/request/request.router.js";
 import relationshipRouter from "./src/features/relationship/relationship.router.js";
+import searchRoomRouter from "./src/features/searchRooms/searchRooms.route.js";
 dotenv.config();
 
 const app = express();
 const corsOptions = {
-  origin: "http://localhost:5173/",
+  origin: "http://localhost:5173",
   // origin: "https://renters-eight.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
@@ -39,6 +40,7 @@ app.use("/api/history", historyRouter);
 app.use("/api/favourite", favouriteRouter);
 app.use("/api/request", requestRouter);
 app.use("/api/relationship", relationshipRouter);
+app.use("/api/search", searchRoomRouter);
 
 app.listen(port, () => {
   connectToMongoose();

@@ -98,6 +98,17 @@ class RelationshipSchma {
     const history = await historyModel.find({ relationId }).sort({ date: -1 });
     return history;
   }
+
+  async isEngaged(userId) {
+    const isEngaged = await relationshipModel.findOne({
+      renterId: userId,
+    });
+    if (isEngaged) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 export default RelationshipSchma;

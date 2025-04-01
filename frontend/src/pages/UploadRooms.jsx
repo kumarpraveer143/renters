@@ -1,13 +1,36 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { toast } from "react-toastify";
-
 import { API_URL } from "../config";
+
+
 
 const UploadRooms = () => {
   const navigate = useNavigate();
+  const [districtData, setDistrictData] = useState([]);
+  const [selectedState, setSelectedState] = useState("");
+  const [availableDistricts, setAvailableDistricts] = useState([]);
+
+
+
+
+  useEffect(() => {
+    fetch('/utils/districtData.json')
+      .then((response) => response.json())
+      .then((data) => setDistrictData(data.states))
+      .catch((error) => console.error('Error fetching the data:', error));
+  }, []);
+
+  const indianStates = [
+    "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+    "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka",
+    "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram",
+    "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu",
+    "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"
+  ];
+
+
 
   const [formData, setFormData] = useState({
     address: {
@@ -23,6 +46,15 @@ const UploadRooms = () => {
     // photos: [],
     isAvailable: true,
   });
+
+
+  const handleStateChange = (e) => {
+    const selectedState = e.target.value;
+    setSelectedState(selectedState);
+
+    const stateData = districtData.find(state => state.state === selectedState);
+    setAvailableDistricts(stateData ? stateData.districts : []);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -58,7 +90,6 @@ const UploadRooms = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission
-
     try {
       const response = await axios.post(`${API_URL}/rooms/`, formData, {
         withCredentials: true,
@@ -98,16 +129,39 @@ const UploadRooms = () => {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium">City</label>
-            <input
-              type="text"
+            <label className="block text-sm font-medium">State</label>
+            <select
+              name="address.state"
+              value={formData.address.state}
+              onChange={(e) => {
+                handleInputChange(e);
+                handleStateChange(e);
+              }}
+              className="mt-1 block w-full p-2 border rounded-md"
+            >
+              <option value="" disabled>Select a state</option>
+              {indianStates.map((state) => (
+                <option key={state} value={state}>{state}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium">District</label>
+            <select
               name="address.city"
               value={formData.address.city}
               onChange={handleInputChange}
               className="mt-1 block w-full p-2 border rounded-md"
-            />
+            >
+              <option value="" disabled>Select a district</option>
+              {availableDistricts.map((district, index) => (
+                <option key={index} value={district}>{district}</option>
+              ))}
+            </select>
           </div>
-          <div>
+
+          {/* <div>
             <label className="block text-sm font-medium">State</label>
             <input
               type="text"
@@ -116,7 +170,7 @@ const UploadRooms = () => {
               onChange={handleInputChange}
               className="mt-1 block w-full p-2 border rounded-md"
             />
-          </div>
+          </div> */}
         </div>
 
         <div>

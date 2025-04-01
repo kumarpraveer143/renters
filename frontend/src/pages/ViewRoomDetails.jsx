@@ -13,6 +13,7 @@ const ViewRoomDetails = () => {
   const [roomDetails, setRoomDetails] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const [hasRequested, setHasRequested] = useState(false);
+  const [isEngaged, setEngaged] = useState(false)
 
   useEffect(() => {
     const isRequest = async () => {
@@ -20,6 +21,8 @@ const ViewRoomDetails = () => {
         const req = await axios.get(`${API_URL}/request/${roomId}`, {
           withCredentials: true,
         });
+        const isEngaged = await axios.get(`${API_URL}/relationship/engaged`, { withCredentials: true, });
+        setEngaged(isEngaged.data.message)
         setHasRequested(req.data.message);
       } catch (err) {
         console.log(err);
@@ -76,6 +79,11 @@ const ViewRoomDetails = () => {
 
   const handleRequest = async () => {
     try {
+
+      if (isEngaged) {
+        toast.error("You are already occupying another room, so you can't make a request!");
+        return;
+      }
       // SweetAlert2 confirmation dialog
       const result = await Swal.fire({
         title: "Are you sure?",
