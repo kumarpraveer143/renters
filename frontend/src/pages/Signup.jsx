@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -7,6 +7,26 @@ import { API_URL } from "../config";
 
 const SignupRenters = () => {
   const [userType, setUserType] = useState("renter");
+  const [districtData, setDistrictData] = useState([]);
+  const [selectedState, setSelectedState] = useState("");
+  const [availableDistricts, setAvailableDistricts] = useState([]);
+
+  useEffect(() => {
+    fetch('/utils/districtData.json')
+      .then((response) => response.json())
+      .then((data) => setDistrictData(data.states))
+      .catch((error) => console.error('Error fetching the data:', error));
+  }, []);
+
+
+  const indianStates = [
+    "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+    "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka",
+    "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram",
+    "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu",
+    "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"
+  ];
+
   const [formData, setFormData] = useState({
     userType: "renter",
     name: "",
@@ -16,8 +36,8 @@ const SignupRenters = () => {
     houseName: "",
     homeAddress: {
       street: "",
-      city: "",
       state: "",
+      city: "",
       zipCode: "",
     },
     password: "",
@@ -28,6 +48,25 @@ const SignupRenters = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    // Handle state selection
+    if (name === 'homeAddress.state') {
+      const stateData = districtData.find((state) => state.state === value);
+      setAvailableDistricts(stateData ? stateData.districts : []);
+
+      setFormData((prevData) => ({
+        ...prevData,
+        homeAddress: {
+          ...prevData.homeAddress,
+          state: value,
+          city: "", // Reset city when state changes
+        },
+      }));
+
+      return; // Exit early since we handled it above
+    }
+
+    // Handle address fields
     if (name.startsWith("homeAddress.")) {
       const addressField = name.split(".")[1];
       setFormData((prevData) => ({
@@ -38,6 +77,7 @@ const SignupRenters = () => {
         },
       }));
     } else {
+      // Handle other fields
       setFormData((prevData) => ({
         ...prevData,
         [name]: value,
@@ -64,7 +104,7 @@ const SignupRenters = () => {
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-          "An error occurred while registering. Please try again."
+        "An error occurred while registering. Please try again."
       );
     } finally {
       // After submission completes, unlock the form
@@ -235,22 +275,45 @@ const SignupRenters = () => {
               placeholder="Street"
               className="w-full p-3 mb-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
-            <input
+
+            <select
+              name="homeAddress.state"
+              value={formData.homeAddress.state}
+              onChange={handleChange}
+              className="w-full p-3 mb-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            >
+              <option value="">Select State</option>
+              {districtData.map((state) => (
+                <option key={state.state} value={state.state}>
+                  {state.state}
+                </option>
+              ))}
+            </select>
+
+            {/* <input
               type="text"
               name="homeAddress.city"
               value={formData.homeAddress.city}
               onChange={handleChange}
-              placeholder="City"
+              placeholder="District"
               className="w-full p-3 mb-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            />
-            <input
-              type="text"
-              name="homeAddress.state"
-              value={formData.homeAddress.state}
+            /> */}
+
+            <select
+              name="homeAddress.city"
+              value={formData.homeAddress.city}
               onChange={handleChange}
-              placeholder="State"
               className="w-full p-3 mb-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            />
+              disabled={!formData.homeAddress.state} // disable if no state selected
+            >
+              <option value="">Select District</option>
+              {availableDistricts.map((district, index) => (
+                <option key={index} value={district}>
+                  {district}
+                </option>
+              ))}
+            </select>
+
             <input
               type="text"
               name="homeAddress.zipCode"
@@ -259,6 +322,7 @@ const SignupRenters = () => {
               placeholder="Zip Code"
               className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
+
           </div>
 
           {/* Password */}

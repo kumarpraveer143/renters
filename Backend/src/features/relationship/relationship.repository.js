@@ -99,11 +99,38 @@ class RelationshipSchma {
     return history;
   }
 
+  //this is searh from the renters id
   async isEngaged(userId) {
     const isEngaged = await relationshipModel.findOne({
       renterId: userId,
     });
-    if (isEngaged) {
+
+    if (isEngaged.status == "active") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  //this is searh from the landowner id
+  async isArchieve(userId, relationId) {
+    const isArchieve = await relationshipModel.findOne({
+      ownerId: userId,
+      _id: relationId,
+    });
+    if (isArchieve.status == "active") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  //is the room exist in the relation or not!
+  async isRelation(roomId) {
+    const isRelation = await relationshipModel.findOne({
+      roomId: roomId,
+    });
+    if (isRelation) {
       return true;
     } else {
       return false;

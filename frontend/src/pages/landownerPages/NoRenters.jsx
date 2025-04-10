@@ -14,7 +14,6 @@ const NoRenters = () => {
         <Link to="/dashboard">
           <button
             className="px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-600 transition duration-300"
-            onClick={() => alert("Add Renters functionality here!")}
           >
             Dashboard
           </button>

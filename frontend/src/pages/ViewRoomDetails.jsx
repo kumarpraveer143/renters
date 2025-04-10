@@ -22,7 +22,7 @@ const ViewRoomDetails = () => {
           withCredentials: true,
         });
         const isEngaged = await axios.get(`${API_URL}/relationship/engaged`, { withCredentials: true, });
-        setEngaged(isEngaged.data.message)
+        setEngaged(isEngaged.data.message);
         setHasRequested(req.data.message);
       } catch (err) {
         console.log(err);

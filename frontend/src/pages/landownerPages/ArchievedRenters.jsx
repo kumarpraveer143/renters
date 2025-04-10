@@ -6,10 +6,13 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import NoRenters from "./NoRenters";
 import Loading from "../../components/UI/Loading";
+import { useNavigate } from "react-router-dom";
 
 const ArchievedRenters = () => {
   const [renters, setRenters] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -27,14 +30,8 @@ const ArchievedRenters = () => {
     setLoading(false);
   }, []);
 
-  const handleCheckHistory = () => {
-    console.log("Check History button clicked");
-  };
-
-  const handleAddRent = () => {
-    console.log("Add Rent button clicked");
-    // console.log(renters);
-    console.log(renters);
+  const handleCheckHistory = (relationId) => {
+    navigate(`/check-history/${relationId}`);
   };
 
   const handleRemoveRenter = async (relationId) => {
@@ -132,7 +129,7 @@ const ArchievedRenters = () => {
             <div className="mt-4 md:mt-0 flex space-x-4">
               <button
                 className="relative flex items-center justify-center bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 md:px-6 md:justify-start group"
-                onClick={handleCheckHistory}
+                onClick={() => handleCheckHistory(renter.relationId)}
               >
                 <FaHistory className="mr-2" />
                 <span className="hidden md:inline">Check History</span>

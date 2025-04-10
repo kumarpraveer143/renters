@@ -14,6 +14,8 @@ const LandOwnerRooms = () => {
   const [editingRoom, setEditingRoom] = useState(null);
   const navigate = useNavigate();
 
+
+
   useEffect(() => {
     setLoading(true);
     const fetchRooms = async () => {
@@ -73,6 +75,17 @@ const LandOwnerRooms = () => {
   };
 
   const handleDeleteClick = async (roomId) => {
+    const response = await axios.post(`${API_URL}/relationship/relationByRoomId`, { roomId }, { withCredentials: true })
+    if (response.data.message) {
+      toast.error("There is someone in the room, so you can't delete it!");
+      return;
+    }
+    // const room = rooms.find((room) => room._id == roomId)
+    // const isAvailable = room.isAvailable;
+    // if (!isAvailable) {
+    //   toast.error("There is someone in the room, so you can't delete it!");
+    //   return;
+    // }
     Swal.fire({
       title: "Are you sure?",
       text: "This action cannot be undone!",
@@ -89,8 +102,6 @@ const LandOwnerRooms = () => {
             withCredentials: true,
           });
           toast.success("Room Deleted Successfully!");
-          // console.log(response.data);
-
           // Update the rooms state after deletion
           setRooms(rooms.filter((room) => room._id !== roomId));
         } catch (err) {

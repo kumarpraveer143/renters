@@ -5,11 +5,8 @@ import { ToastContainer } from "react-toastify"; // Import ToastContainer
 import "react-toastify/dist/ReactToastify.css"; // Import Toastify CSS
 import LandownerAuth from "./components/Auth/LandownerAuth";
 import RentersAuth from "./components/Auth/RentersAuth";
-import PaymentHistory from "./pages/landownerPages/PaymentHistory";
-import MyRenters from "./pages/landownerPages/MyRenters";
 import Loading from "./components/UI/Loading";
 import AuthenticatedUser from "./components/Auth/AuthenticatedUser";
-import RenterMyRoom from "./pages/rentersPages/RenterMyRoom";
 
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const LandOwnerRooms = React.lazy(() =>
@@ -51,6 +48,16 @@ const IncommingRequest = React.lazy(() =>
 );
 const RenterHistoryDetails = React.lazy(() =>
   import("./pages/rentersPages/RenterHistoryDetails")
+);
+const RenterMyRoom = React.lazy(() =>
+  import("./pages/rentersPages/RenterMyRoom")
+);
+
+const PaymentHistory = React.lazy(() =>
+  import("./pages/landownerPages/PaymentHistory")
+);
+const MyRenters = React.lazy(() =>
+  import("./pages/landownerPages/MyRenters")
 );
 
 const App = () => {

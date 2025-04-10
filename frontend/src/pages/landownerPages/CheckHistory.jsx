@@ -14,7 +14,18 @@ const CheckHistory = () => {
   const [editedRent, setEditedRent] = useState({});
   const [loading, setLoading] = useState(false);
 
+  const [isArchieve, setIsArchieve] = useState(false);
+
   const { relationId } = useParams();
+
+  useEffect(() => {
+    const fetchisArchieve = async () => {
+      const isArchieve = await axios.post(`${API_URL}/relationship/isArchieve`, { relationId }, { withCredentials: true });
+      setIsArchieve(isArchieve.data.message)
+    }
+    fetchisArchieve();
+  }, [])
+
 
   useEffect(() => {
     setLoading(true);
@@ -142,9 +153,10 @@ const CheckHistory = () => {
               <th className="border border-gray-300 px-4 py-2 text-left">
                 Remarks
               </th>
-              <th className="border border-gray-300 px-4 py-2 text-center">
+              {!isArchieve ? <th className="border border-gray-300 px-4 py-2 text-center">
                 Actions
-              </th>
+              </th> : ""}
+
             </tr>
           </thead>
           <tbody>
@@ -222,20 +234,23 @@ const CheckHistory = () => {
                     <td className="border border-gray-300 px-4 py-2">
                       {rent.remarks || "N/A"}
                     </td>
-                    <td className="border border-gray-300 px-4 py-2 text-center">
-                      <button
-                        onClick={() => handleEdit(index)}
-                        className="bg-gray-800 hover:bg-gray-600 text-white px-3 py-1 rounded mr-2"
-                      >
-                        <FaEdit />
-                      </button>
-                      <button
-                        onClick={() => handleDelete(rent._id)}
-                        className="bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded mr-2 "
-                      >
-                        <FaTrash />
-                      </button>
-                    </td>
+
+                    {!isArchieve ?
+                      <td className="border border-gray-300 px-4 py-2 text-center">
+                        <button
+                          onClick={() => handleEdit(index)}
+                          className="bg-gray-800 hover:bg-gray-600 text-white px-3 py-1 rounded mr-2"
+                        >
+                          <FaEdit />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(rent._id)}
+                          className="bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded mr-2 "
+                        >
+                          <FaTrash />
+                        </button>
+                      </td>
+                      : ""}
                   </>
                 )}
               </tr>

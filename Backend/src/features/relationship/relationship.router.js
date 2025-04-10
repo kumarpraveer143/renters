@@ -48,8 +48,18 @@ relationshipRouter.get("/historyOfRenter", jwtAuth, (req, res) => {
 });
 
 //route to see wheather the user is in some room or not!
-relationshipRouter.get("/engaged",jwtAuth,(req,res)=>{
-  relationshipController.engaged(req,res);
-})
+relationshipRouter.get("/engaged", jwtAuth, (req, res) => {
+  relationshipController.engaged(req, res);
+});
+
+//router of the landowner to see the archieve users history!
+relationshipRouter.post("/isArchieve", landOwnerAuth, (req, res) => {
+  relationshipController.isArchieve(req, res);
+});
+
+//router to check is the room exit in the relationship of not! (to confirm before deleting the room!)
+relationshipRouter.post("/relationByRoomId", landOwnerAuth, (req, res) => {
+  relationshipController.relationByRoomId(req, res);
+});
 
 export default relationshipRouter;

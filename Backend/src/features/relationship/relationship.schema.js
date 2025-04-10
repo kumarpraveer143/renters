@@ -26,7 +26,7 @@ const relationshipSchema = new mongoose.Schema(
       enum: ["active", "archive"],
       default: "active",
     },
-
+    
     historyId: {
       type: mongoose.Types.ObjectId,
       ref: "History",

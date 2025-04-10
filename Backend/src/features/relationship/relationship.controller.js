@@ -148,11 +148,55 @@ class RelationshipController {
     }
   }
 
+  //this is being searched by the renters side
   async engaged(req, res) {
     let { userId } = req.cookies;
     try {
       const findRenterId = await this.relaltionshipRepository.isEngaged(userId);
       if (findRenterId) {
+        return res.status(200).json({ success: true, message: true });
+      } else {
+        return res.status(200).json({ success: true, message: false });
+      }
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong with database",
+      });
+    }
+  }
+
+  //this is being use by the landowner side
+  async isArchieve(req, res) {
+    let { userId } = req.cookies;
+    let { relationId } = req.body;
+    try {
+      const findRenterId = await this.relaltionshipRepository.isArchieve(
+        userId,
+        relationId
+      );
+      if (findRenterId) {
+        return res.status(200).json({ success: true, message: false });
+      } else {
+        return res.status(200).json({ success: true, message: true });
+      }
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong with database",
+      });
+    }
+  }
+
+  async relationByRoomId(req, res) {
+    const { roomId } = req.body;
+    try {
+      const isRelationship = await this.relaltionshipRepository.isRelation(
+        roomId
+      );
+      if (isRelationship) {
         return res.status(200).json({ success: true, message: true });
       } else {
         return res.status(200).json({ success: true, message: false });
