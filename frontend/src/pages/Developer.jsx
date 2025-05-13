@@ -11,9 +11,10 @@ const Developer = () => {
           data-aos="fade-right"
         >
           <img
+
             src="images/praveer.png"
             alt="Developer"
-            className="rounded-lg shadow-lg w-80 h-100 object-cover hover:scale-105 transition-transform duration-300"
+            className="developer rounded-lg shadow-lg w-80 h-100 object-cover hover:scale-105 transition-transform duration-300"
           />
         </div>
 
