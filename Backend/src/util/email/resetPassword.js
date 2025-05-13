@@ -123,8 +123,8 @@ const sendPasswordResetEmail = async (user, resetPasswordURL) => {
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
-    if (err) {
-      return console.log(err);
+    if (error) {
+      return console.log(error);
     }
     console.log("Email sent successfully!");
   });

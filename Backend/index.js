@@ -26,8 +26,8 @@ app.use(cors(corsOptions));
 
 const port = process.env.PORT;
 
-app.get("/", (req, res) => {
-  res.send("This is renter application!");
+app.get("/get/user", (req, res) => {
+  res.json({ message: "Bakend is working properly!" });
 });
 
 //Middlewares

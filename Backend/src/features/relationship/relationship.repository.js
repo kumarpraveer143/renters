@@ -105,7 +105,7 @@ class RelationshipSchma {
       renterId: userId,
     });
 
-    if (isEngaged.status == "active") {
+    if (isEngaged.status === "active") {
       return true;
     } else {
       return false;
