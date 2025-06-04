@@ -3,6 +3,8 @@
 **Renters** is a web application that connects landowners and renters through a simple, user-friendly platform. Landowners can manage rooms and track payments, while renters can search, request, and save rooms they like.
 
 ## ✨ Features
+![renter](https://github.com/user-attachments/assets/3f95989e-b16c-4ad5-9724-1e68ca4fe04f)
+
 
 ### 🔐 Authentication
 - Secure login and signup for both landowners and renters
