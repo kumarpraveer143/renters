@@ -26,7 +26,7 @@ app.use(cors(corsOptions));
 
 const port = process.env.PORT;
 
-app.get("/get/user", (req, res) => {
+app.get("/", (req, res) => {
   res.json({ message: "Bakend is working properly!" });
 });
 
