@@ -56,9 +56,7 @@ const RenterMyRoom = React.lazy(() =>
 const PaymentHistory = React.lazy(() =>
   import("./pages/landownerPages/PaymentHistory")
 );
-const MyRenters = React.lazy(() =>
-  import("./pages/landownerPages/MyRenters")
-);
+const MyRenters = React.lazy(() => import("./pages/landownerPages/MyRenters"));
 
 const App = () => {
   return (

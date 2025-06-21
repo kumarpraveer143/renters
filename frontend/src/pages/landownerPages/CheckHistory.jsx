@@ -20,12 +20,15 @@ const CheckHistory = () => {
 
   useEffect(() => {
     const fetchisArchieve = async () => {
-      const isArchieve = await axios.post(`${API_URL}/relationship/isArchieve`, { relationId }, { withCredentials: true });
-      setIsArchieve(isArchieve.data.message)
-    }
+      const isArchieve = await axios.post(
+        `${API_URL}/relationship/isArchieve`,
+        { relationId },
+        { withCredentials: true }
+      );
+      setIsArchieve(isArchieve.data.message);
+    };
     fetchisArchieve();
-  }, [])
-
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -153,10 +156,13 @@ const CheckHistory = () => {
               <th className="border border-gray-300 px-4 py-2 text-left">
                 Remarks
               </th>
-              {!isArchieve ? <th className="border border-gray-300 px-4 py-2 text-center">
-                Actions
-              </th> : ""}
-
+              {!isArchieve ? (
+                <th className="border border-gray-300 px-4 py-2 text-center">
+                  Actions
+                </th>
+              ) : (
+                ""
+              )}
             </tr>
           </thead>
           <tbody>
@@ -235,7 +241,7 @@ const CheckHistory = () => {
                       {rent.remarks || "N/A"}
                     </td>
 
-                    {!isArchieve ?
+                    {!isArchieve ? (
                       <td className="border border-gray-300 px-4 py-2 text-center">
                         <button
                           onClick={() => handleEdit(index)}
@@ -250,7 +256,9 @@ const CheckHistory = () => {
                           <FaTrash />
                         </button>
                       </td>
-                      : ""}
+                    ) : (
+                      ""
+                    )}
                   </>
                 )}
               </tr>

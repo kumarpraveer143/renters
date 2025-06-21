@@ -5,11 +5,14 @@ import { API_URL } from "../config";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import NoRoomsFound from "./NoRoomsFound";
+import Loading from "../components/UI/Loading";
 
 const FavouriteRoom = () => {
   const [rooms, setRooms] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const fetchRooms = async () => {
       try {
         const cachedRooms = localStorage.getItem("favouriteRooms");
@@ -26,6 +29,7 @@ const FavouriteRoom = () => {
       } catch (error) {
         console.error("Error fetching rooms:", error);
       }
+      setLoading(false);
     };
     fetchRooms();
   }, []);
@@ -35,6 +39,10 @@ const FavouriteRoom = () => {
   const handleViewRoom = (roomId) => {
     navigate(`/viewRoomsDetails/${roomId}`); // Redirect to detailed room page
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   if (rooms.length == 0) {
     return <NoRoomsFound />;

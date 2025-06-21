@@ -43,7 +43,7 @@ const RenterMyRoom = () => {
   }, []);
 
   if (loading) {
-    <Loading />;``
+    return <Loading />;
   }
 
   if (!room) {

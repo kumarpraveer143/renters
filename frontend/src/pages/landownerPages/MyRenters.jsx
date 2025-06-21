@@ -24,8 +24,8 @@ const MyRenters = () => {
         (item) => item.renterStatus === "active"
       );
       setRenters(activeRenters);
+      setLoading(false);
     };
-    setLoading(false);
     data();
   }, []);
 
