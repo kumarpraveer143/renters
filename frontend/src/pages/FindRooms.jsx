@@ -4,6 +4,7 @@ import { FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import NoRoomsFound from "./NoRoomsFound";
 import { API_URL } from "../config";
+import Loading from "../components/UI/Loading";
 
 const FindRooms = () => {
   const [rooms, setRooms] = useState([]);
@@ -11,8 +12,10 @@ const FindRooms = () => {
   const [searchZip, setSearchZip] = useState("");
   const [limit, setLimit] = useState(25); // Load 25 rooms initially
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     const fetchRooms = async () => {
       try {
         const response = await axios.get(`${API_URL}/rooms/availableRoom`, {
@@ -23,6 +26,7 @@ const FindRooms = () => {
       } catch (err) {
         console.error("Error fetching rooms:", err);
       }
+      setLoading(false);
     };
     fetchRooms();
   }, []);
@@ -49,6 +53,9 @@ const FindRooms = () => {
     navigate(`/viewRoomsDetails/${roomId}`); // Redirect to detailed room page
   };
 
+  if (loading) {
+    return <Loading />;
+  }
   if (rooms.length === 0) {
     return <NoRoomsFound />;
   }
