@@ -37,13 +37,21 @@
 2. Install dependencies:
    ```bash
    cd renters
+   
+3. Go to Backend
+   ```bash
+   cd Backend
    npm install
-   
-4. Set up environment variables: 
-     Create a .env file with DB connection string, JWT secret, etc.
-   
-5. Start the development server:
-   ```bash 
    npm run go
+   
+4.  Go to frontend
+    ```bash
+    cd frontend
+    npm install
+    npm run dev
+
+5. Set up environment variables: 
+     Create a .env file with DB connection string, JWT secret, etc.
+
 
 Let me know your exact tech stack or GitHub URL if you want this customized further.
