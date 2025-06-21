@@ -11,16 +11,19 @@ import {
 import { API_URL } from "../../config";
 import { useNavigate } from "react-router-dom";
 import NoRoomsFound from "../NoRoomsFound";
+import Loading from "../../components/UI/Loading";
 
 const RenterMyRoom = () => {
   const navigate = useNavigate();
   const [room, setRoom] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleCheckHistory = (roomId) => {
     navigate("/renter-history");
   };
 
   useEffect(() => {
+    setLoading(true);
     const getRoomDetails = async () => {
       try {
         const response = await axios.get(
@@ -33,10 +36,15 @@ const RenterMyRoom = () => {
       } catch (error) {
         console.error("Error fetching room details:", error);
       }
+      setLoading(false);
     };
 
     getRoomDetails();
   }, []);
+
+  if (loading) {
+    <Loading />;``
+  }
 
   if (!room) {
     return <NoRoomsFound />;

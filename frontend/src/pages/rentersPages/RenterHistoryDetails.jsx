@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../../config";
+import Loading from "../../components/UI/Loading";
 
 const RenterHistoryDetails = () => {
   const [history, setHistory] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const getHistory = async () => {
       try {
         let response = await axios.get(
@@ -16,6 +19,7 @@ const RenterHistoryDetails = () => {
       } catch (error) {
         console.error("Failed to fetch renter history:", error);
       }
+      setLoading(false);
     };
     getHistory();
   }, []);
@@ -24,6 +28,9 @@ const RenterHistoryDetails = () => {
     const options = { day: "numeric", month: "long", year: "numeric" };
     return new Date(dateString).toLocaleDateString("en-GB", options);
   };
+  if (loading) {
+    <Loading />;
+  }
 
   return (
     <div className="container mx-auto p-4">
