@@ -80,6 +80,7 @@ const App = () => {
 
             <Route path="/reset/:token" element={<Reset />} />
             <Route path="/forget-password" element={<ForgotPassword />} />
+            <Route path="/findrooms" element={<FindRooms />} />
 
             {/* Unauthorized Route */}
             <Route element={<UnauthenticatedRoute />}>
@@ -90,7 +91,6 @@ const App = () => {
             {/* <Route element={<AuthenticatedUser />}> */}
             {/* Routes for only Renters */}
             <Route element={<RentersAuth />}>
-              <Route path="/findrooms" element={<FindRooms />} />
               <Route path="/rentersMyRoom" element={<RenterMyRoom />} />
               <Route
                 path="/viewRoomsDetails/:id"

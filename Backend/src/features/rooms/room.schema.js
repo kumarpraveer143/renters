@@ -7,7 +7,6 @@ const RoomSchema = new mongoose.Schema(
   {
     roomNumber: {
       type: Number,
-      unique: true,
     },
     address: {
       street: {
@@ -76,8 +75,6 @@ const RoomSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-RoomSchema.plugin(AutoIncrement, { inc_field: "roomNumber", start_seq: 1 });
 
 RoomSchema.pre("save", function (next) {
   this.updatedAt = Date.now();

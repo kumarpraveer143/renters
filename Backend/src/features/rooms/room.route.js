@@ -44,7 +44,7 @@ roomRouter.post("/toggle-room/:roomId", landOwnerAuth, (req, res) => {
 });
 
 //get rooms by status!
-roomRouter.get("/availableRoom", jwtAuth, (req, res) => {
+roomRouter.get("/availableRoom", (req, res) => {
   roomController.getAvailableRoom(req, res);
 });
 
